@@ -1,11 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>学習記録管理システム</title>
     </head>
     <body>
+
         <h1>学習記録管理システム</h1>
-        <p>Spring Bootで作成した学習記録アプリです。</p>
+
+        <h2>学習記録の登録</h2>
+
+        <form th:action="@{/records}" method="post">
+            <label>学習科目</label>
+            <input type="text" name="subject"
+                   maxlength="100" required>
+
+            <label>学習日</label>
+            <input type="date" name="studyDate" required>
+
+            <label>学習時間（分）</label>
+            <input type="number" name="minutes"
+                   min="1" max="1440" required>
+
+            <button type="submit">登録</button>
+        </form>
+
+        <table border="1">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>学習科目</th>
+                <th>学習日</th>
+                <th>学習時間</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="record : ${records}">
+                <td th:text="${record.id}"></td>
+                <td th:text="${record.subject}"></td>
+                <td th:text="${record.studyDate}"></td>
+                <td th:text="${record.minutes}"></td>
+            </tr>
+            </tbody>
+        </table>
+
     </body>
 </html>

@@ -8,6 +8,7 @@
     <body>
 
         <h1>学習記録管理システム</h1>
+        <section class="card">
 
         <h2>学習記録の登録</h2>
 
@@ -25,6 +26,7 @@
 
             <button type="submit">登録</button>
         </form>
+        </section>
 
         <table border="1">
             <thead>
@@ -38,6 +40,10 @@
             </thead>
 
             <tbody>
+            <tr th:if="${#lists.isEmpty(records)}">
+                <td colspan="5">学習記録がまだありません。</td>
+            </tr>
+
             <tr th:each="record : ${records}">
                 <td th:text="${record.id}"></td>
                 <td th:text="${record.subject}"></td>
